@@ -95,6 +95,7 @@ public class LoginAsync extends AsyncTask<Void,Void, String>
         }
         return response;
     }
+
     private String getPostDataString(HashMap<String, String> params) throws UnsupportedEncodingException {
         StringBuilder result = new StringBuilder();
         boolean first = true;

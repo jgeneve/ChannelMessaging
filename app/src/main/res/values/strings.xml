@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">ChannelMessaging</string>
+    <string name="channel">Channel</string>
+    <string name="nombre_d_apos_utilisateurs_connect_s">Nombre d\'utilisateurs connectés :</string>
 </resources>

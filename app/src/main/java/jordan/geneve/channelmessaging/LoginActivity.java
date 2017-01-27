@@ -55,8 +55,7 @@ public class LoginActivity extends Activity implements View.OnClickListener, OnD
 
         if(accessLogin.getAccesstoken() != null)
         {
-            SharedPreferences settings =
-            getSharedPreferences(PREFS_NAME, 0);
+            SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
             SharedPreferences.Editor editor = settings.edit();
             editor.putString("access", accessLogin.getAccesstoken());
             editor.commit();
