@@ -19,8 +19,9 @@
         </activity>
         <activity
             android:name=".ChannelListActivity"
-            android:label="Liste des channels"></activity>
-        <activity android:name=".MessageChannelActivity"></activity>
+            android:label="Liste des channels" />
+        <activity android:name=".MessageChannelActivity" />
+        <activity android:name=".Channel"></activity>
     </application>
 
 </manifest>

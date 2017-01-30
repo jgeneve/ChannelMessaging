@@ -59,7 +59,7 @@ public class LoginAsync extends AsyncTask<Void,Void, String>
     {
         for(OnDownloadCompleteListener listener : listeners)
         {
-            listener.onDownloadComplete(result);
+            listener.onDownloadComplete(result, 1);
         }
     }
 

@@ -49,7 +49,7 @@ public class LoginActivity extends Activity implements View.OnClickListener, OnD
     }
 
     @Override
-    public void onDownloadComplete(String result) {
+    public void onDownloadComplete(String result, Integer requestCode) {
         Gson gson = new Gson();
         JsonAccess accessLogin = gson.fromJson(result, JsonAccess.class);
 

@@ -19,17 +19,18 @@ import java.util.Map;
 import javax.net.ssl.HttpsURLConnection;
 
 /**
- * Created by genevejo on 23/01/2017.
+ * Created by genevejo on 30/01/2017.
  */
-public class ChannelAsync extends AsyncTask<Void,Void, String> {
+public class SendMessageAsync extends AsyncTask<Void, Void, String> {
+
     private Context context;
-    private HashMap<String, String> accessToken;
+    private HashMap<String, String> accessChannel;
 
     public ArrayList<OnDownloadCompleteListener> listeners = new ArrayList<>();
 
-    public ChannelAsync(Context myContext, HashMap<String, String> myAccessToken) {
+    public SendMessageAsync(Context myContext, HashMap<String, String> myAccess) {
         this.context = myContext;
-        this.accessToken = myAccessToken;
+        this.accessChannel = myAccess;
     }
 
     @Override
@@ -45,14 +46,14 @@ public class ChannelAsync extends AsyncTask<Void,Void, String> {
 
     @Override
     protected String doInBackground(Void... arg0) {
-        return performPostCall("http://www.raphaelbischof.fr/messaging/?function=getchannels", accessToken);
+        return performPostCall("http://www.raphaelbischof.fr/messaging/?function=sendmessage", accessChannel);
     }
 
     @Override
     protected void onPostExecute(String result) {
         for(OnDownloadCompleteListener listener : listeners)
         {
-            listener.onDownloadComplete(result, 1);
+            listener.onDownloadComplete(result, 0);
         }
     }
 
@@ -102,9 +103,7 @@ public class ChannelAsync extends AsyncTask<Void,Void, String> {
         return result.toString();
     }
 
-    public void setOnDownloadCompleteListener(OnDownloadCompleteListener listener, Integer requestCode) {
+    public void setOnDownloadCompleteListener(OnDownloadCompleteListener listener) {
         listeners.add(listener);
-
     }
-
 }
