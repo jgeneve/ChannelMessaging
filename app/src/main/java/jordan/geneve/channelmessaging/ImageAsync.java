@@ -36,6 +36,7 @@ public class ImageAsync extends AsyncTask<Void,Void, Void> {
     private String fileUrl;
     private String fileName;
     private ImageView imgView;
+    private String Image;
 
     public ImageAsync(Context myContext, String myUrlFile, String myFileName, ImageView myImageView)
     {
@@ -52,6 +53,7 @@ public class ImageAsync extends AsyncTask<Void,Void, Void> {
         downloadFromUrl(fileUrl, fileName);
         return null;
     }
+
 
     public void downloadFromUrl(String fileURL, String fileName) {
         try {

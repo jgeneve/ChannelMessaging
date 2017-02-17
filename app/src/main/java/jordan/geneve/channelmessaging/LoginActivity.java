@@ -50,24 +50,34 @@ public class LoginActivity extends Activity implements View.OnClickListener, OnD
 
     @Override
     public void onDownloadComplete(String result, Integer requestCode) {
-        Gson gson = new Gson();
-        JsonAccess accessLogin = gson.fromJson(result, JsonAccess.class);
-
-        if(accessLogin.getAccesstoken() != null)
+        if(result!=null)
         {
-            SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
-            SharedPreferences.Editor editor = settings.edit();
-            editor.putString("access", accessLogin.getAccesstoken());
-            editor.commit();
+            Gson gson = new Gson();
+            JsonAccess accessLogin = gson.fromJson(result, JsonAccess.class);
 
-            Intent newActivity = new Intent(getApplicationContext(), ChannelListActivity.class);
-            startActivity(newActivity);
+            if(accessLogin.getAccesstoken() != null)
+            {
+                SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+                SharedPreferences.Editor editor = settings.edit();
+                editor.putString("access", accessLogin.getAccesstoken());
+                editor.commit();
 
+                Intent newActivity = new Intent(getApplicationContext(), ChannelListActivity.class);
+                startActivity(newActivity);
+
+            }
+            else
+            {
+                Toast.makeText(getApplicationContext(), accessLogin.getResponse(), Toast.LENGTH_SHORT).show();
+            }
         }
         else
         {
-            Toast.makeText(getApplicationContext(), accessLogin.getResponse(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Veuillez vérifier votre connexion internet", Toast.LENGTH_SHORT).show();
         }
+
+
+
 
 
     }
