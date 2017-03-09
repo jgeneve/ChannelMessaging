@@ -2,6 +2,7 @@ package jordan.geneve.channelmessaging;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -16,38 +17,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
-public class ChannelListActivity extends AppCompatActivity implements OnDownloadCompleteListener, AdapterView.OnItemClickListener {
+import jordan.geneve.fragments.ChannelListFragment;
 
-    private ListView listView;
-    private List<JsonChannel> listChan;
-
+public class ChannelListActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        SharedPreferences settings = getSharedPreferences(LoginActivity.PREFS_NAME, 0);
-        String access = settings.getString("access", "token");
-        HashMap<String, String> token = new HashMap<>();
-        token.put("accesstoken", access);
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_channel_list);
-        listView = (ListView) findViewById(R.id.listViewChannel);
-        ChannelAsync channel = new ChannelAsync(getApplicationContext(), token);
-        channel.setOnDownloadCompleteListener(this, 1);
-        channel.execute();
-    }
 
-
-    @Override
-    public void onDownloadComplete(String result, Integer requestCode) {
-         Gson gson = new Gson();
-        JsonChannels accessChannels = gson.fromJson(result, JsonChannels.class);
-
-        accessChannels.toString();
-        listChan = accessChannels.getChannels();
-
-        listView.setAdapter(new ArrayAdapterChannel(getApplicationContext(), accessChannels.getChannels()));
-        listView.setOnItemClickListener(this);
     }
 
     @Override
@@ -55,6 +34,16 @@ public class ChannelListActivity extends AppCompatActivity implements OnDownload
         Intent i = new Intent(getApplicationContext(), Channel.class);
         i.putExtra("ChannelId" , listChan.get(position).getChannelID());
         startActivity(i);
+
+        ChannelListFragment fragA = (ChannelListFragment)getSupportFragmentManager().findFragmentById(R.id.frag_channel);
+        FragmentB fragB = (FragmentB)getSupportFragmentManager().findFragmentById(R.id.fragmentB_ID);
+        if(fragB == null|| !fragB.isInLayout()){
+            Intent i = new Intent(getApplicationContext(),DetailActivity.class);
+            i.putExtra("monTextAAfficher",fragA.listItems[position]);
+            startActivity(i);
+        } else {
+            fragB.fillTextView(fragA.listItems[position]);
+        }
     }
 }
 

@@ -9,15 +9,16 @@ import android.widget.TextView;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by genevejo on 27/01/2017.
  */
 public class ArrayAdapterChannel  extends ArrayAdapter<JsonChannel> {
     private final Context context;
-    private final ArrayList<JsonChannel> values;
+    private final List<JsonChannel> values;
 
-    public ArrayAdapterChannel(Context context, ArrayList<JsonChannel> values) {
+    public ArrayAdapterChannel(Context context, List<JsonChannel> values) {
         super(context, R.layout.channel_layout, values);
         this.context = context;
         this.values = values;

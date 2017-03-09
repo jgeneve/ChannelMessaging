@@ -10,14 +10,12 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="jordan.geneve.channelmessaging.ChannelListActivity">
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
 
-        <ListView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/listViewChannel" />
-    </LinearLayout>
+    <fragment
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:name="jordan.geneve.fragments.ChannelListFragment"
+        android:id="@+id/frag_channel"/>
+
 </LinearLayout>
