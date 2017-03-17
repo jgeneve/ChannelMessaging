@@ -19,6 +19,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -26,11 +27,13 @@ import java.util.HashMap;
 import java.util.List;
 
 import jordan.geneve.channelmessaging.ArrayAdapterChannel;
+import jordan.geneve.channelmessaging.ArrayAdapterMessage;
 import jordan.geneve.channelmessaging.Channel;
 import jordan.geneve.channelmessaging.ChannelAsync;
 import jordan.geneve.channelmessaging.ChannelListActivity;
 import jordan.geneve.channelmessaging.JsonChannel;
 import jordan.geneve.channelmessaging.JsonChannels;
+import jordan.geneve.channelmessaging.JsonMessages;
 import jordan.geneve.channelmessaging.LoginActivity;
 import jordan.geneve.channelmessaging.MessageAsync;
 import jordan.geneve.channelmessaging.OnDownloadCompleteListener;
@@ -91,8 +94,7 @@ public class MessageFragment extends Fragment implements View.OnClickListener, O
         };
         handler.postDelayed(r, 1000);
 
-
-
+        return v;
     }
 
     @Override
@@ -114,24 +116,21 @@ public class MessageFragment extends Fragment implements View.OnClickListener, O
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        listViewFragment.setOnItemClickListener((AdapterView.OnItemClickListener) getActivity());
+        listView.setOnItemClickListener((AdapterView.OnItemClickListener) getActivity());
     }
 
     @Override
     public void onDownloadComplete(String result, Integer requestCode) {
-        Gson gson = new Gson();
-        JsonChannels accessChannels = gson.fromJson(result, JsonChannels.class);
-
-        accessChannels.toString();
-        listChan = accessChannels.getChannels();
-
-        listViewFragment.setAdapter(new ArrayAdapterChannel( getActivity(), accessChannels.getChannels()));
+        if(requestCode == 1)
+        {
+            Gson gson = new Gson();
+            JsonMessages messages = gson.fromJson(result, JsonMessages.class);
+            listView.setAdapter(new ArrayAdapterMessage(getActivity().getApplicationContext(), messages.getListMessage()));
+        }
+        else
+        {
+            Toast.makeText(getActivity().getApplicationContext(), "Message envoyé", Toast.LENGTH_SHORT).show();
+        }
     }
 
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Intent i = new Intent((ChannelListActivity)getActivity(), Channel.class);
-        i.putExtra("ChannelId" , listChan.get(position).getChannelID());
-        startActivity(i);
-    }
 }

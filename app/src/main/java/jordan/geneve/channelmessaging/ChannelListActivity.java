@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Objects;
 
 import jordan.geneve.fragments.ChannelListFragment;
+import jordan.geneve.fragments.MessageFragment;
 
 public class ChannelListActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
@@ -31,15 +32,11 @@ public class ChannelListActivity extends AppCompatActivity implements AdapterVie
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Intent i = new Intent(getApplicationContext(), Channel.class);
-        i.putExtra("ChannelId" , listChan.get(position).getChannelID());
-        startActivity(i);
-
         ChannelListFragment fragA = (ChannelListFragment)getSupportFragmentManager().findFragmentById(R.id.frag_channel);
-        FragmentB fragB = (FragmentB)getSupportFragmentManager().findFragmentById(R.id.fragmentB_ID);
+        MessageFragment fragB = (MessageFragment)getSupportFragmentManager().findFragmentById(R.id.frag_message);
         if(fragB == null|| !fragB.isInLayout()){
-            Intent i = new Intent(getApplicationContext(),DetailActivity.class);
-            i.putExtra("monTextAAfficher",fragA.listItems[position]);
+            Intent intent = new Intent(getApplicationContext(),DetailActivity.class);
+            intent.putExtra("monTextAAfficher",fragA.listItems[position]);
             startActivity(i);
         } else {
             fragB.fillTextView(fragA.listItems[position]);
