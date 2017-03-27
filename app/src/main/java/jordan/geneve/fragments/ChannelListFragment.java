@@ -32,7 +32,7 @@ import jordan.geneve.channelmessaging.R;
 public class ChannelListFragment extends Fragment implements OnDownloadCompleteListener, AdapterView.OnItemClickListener{
 
     private ListView listViewFragment;
-    private List<JsonChannel> listChan;
+    public List<JsonChannel> listChan;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

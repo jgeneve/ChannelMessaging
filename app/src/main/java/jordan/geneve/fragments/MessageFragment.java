@@ -116,7 +116,7 @@ public class MessageFragment extends Fragment implements View.OnClickListener, O
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        listView.setOnItemClickListener((AdapterView.OnItemClickListener) getActivity());
+        //listView.setOnItemClickListener((AdapterView.OnItemClickListener) getActivity());
     }
 
     @Override
@@ -130,6 +130,23 @@ public class MessageFragment extends Fragment implements View.OnClickListener, O
         else
         {
             Toast.makeText(getActivity().getApplicationContext(), "Message envoyé", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults)
+    {
+        switch (requestCode) {
+            case MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE :
+            {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
+                {
+
+                } else {
+
+                }
+                return;
+            }
         }
     }
 

@@ -35,12 +35,12 @@ public class ChannelListActivity extends AppCompatActivity implements AdapterVie
         ChannelListFragment fragA = (ChannelListFragment)getSupportFragmentManager().findFragmentById(R.id.frag_channel);
         MessageFragment fragB = (MessageFragment)getSupportFragmentManager().findFragmentById(R.id.frag_message);
         if(fragB == null|| !fragB.isInLayout()){
-            Intent intent = new Intent(getApplicationContext(),DetailActivity.class);
-            intent.putExtra("monTextAAfficher",fragA.listItems[position]);
-            startActivity(i);
-        } else {
+            Intent intent = new Intent(getApplicationContext(),Channel.class);
+            intent.putExtra("idChan",fragA.listChan.get(position).getChannelID());
+            startActivity(intent);
+        } /*else {
             fragB.fillTextView(fragA.listItems[position]);
-        }
+        }*/
     }
 }
 

@@ -22,33 +22,23 @@ import com.google.gson.Gson;
 
 import java.util.HashMap;
 
+import jordan.geneve.fragments.MessageFragment;
+
 public class Channel extends AppCompatActivity {
 
-    private ListView listView;
-    private EditText txtMessage;
-    private Button btnSendMessage;
-    private String accessToken;
-    private String chanId;
-    private ImageView imgView;
-    private Handler handler;
-    private static final int MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 5;
 
-        @Override
-        public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults)
-        {
-            switch (requestCode) {
-                case MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE :
-                {
-                    if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
-                    {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_channel);
+        String texteAAfficher =
+                getIntent().getStringExtra("monTextAAfficher");
+        MessageFragment fragB =
+                (MessageFragment) getSupportFragmentManager().findFragmentById(R.id.frag_message);
+        //fragB.fillTextView(texteAAfficher);
+    }
 
-                    } else {
 
-                    }
-                    return;
-                }
-            }
-        }
 
 
 }

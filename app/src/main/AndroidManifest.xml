@@ -23,7 +23,6 @@
             android:label="Liste des channels" />
         <activity android:name=".MessageChannelActivity" />
         <activity android:name=".Channel" />
-        <activity android:name=".DetailActivity"></activity>
     </application>
 
 </manifest>
